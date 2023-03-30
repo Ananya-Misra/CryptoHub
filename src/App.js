@@ -21,7 +21,7 @@ const App = () => {
           <div classNmae="routes" style={{padding:"1rem"}}>
             <Routes>
               <Route exact path="/" element={<Homepage />} />
-              <Route path="/exchanges" element={<Exchanges />} />
+              {/* <Route path="/exchanges" element={<Exchanges />} /> */}
               <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
               <Route path="/crypto/:coinId" element={<CryptoDetails />} />
               <Route path="/news" element={<News />} />
