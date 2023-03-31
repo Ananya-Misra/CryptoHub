@@ -114,8 +114,10 @@ const CryptoDetails = () => {
             <Title level={3} className="coin-details-heading">
               What is {cryptoDetails.name}
             </Title>
-            {HTMLReactParser(cryptoDetails.description)}
+            
+           
           </Row>
+          <Row> {cryptoDetails.description}</Row>
         <Select
           defaultValue="7d"
           className="select-timeperiod"

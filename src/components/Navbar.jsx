@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Button, Menu, Typography, Avatar } from "antd";
+import React, { useState, useEffect,useRef } from "react";
+import { Button, Menu, Drawer,Typography, Avatar } from "antd";
 import { Link } from "react-router-dom";
+import{FaBars,FaTimes} from 'react-icons/fa'
 import {
   HomeOutlined,
   MoneyCollectOutlined,
@@ -8,53 +9,43 @@ import {
   FundOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
+import '../nav.css';
+import icon from "../images/crypto.png"
 
-import icon from "../images/crypto.png";
 
 export const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState(true);
-  const [screenSize, setScreenSize] = useState(undefined);
-  useEffect(() => {
-    const handleResize = () => setScreenSize(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (screenSize <= 800) {
-      setActiveMenu(false);
-    } else {
-      setActiveMenu(true);
+ 
+    const navRef=useRef();
+    const showNavbar=()=>{
+        navRef.current.classList.toggle('responsive_nav')
     }
-  }, [screenSize]);
   return (
-    <div className="nav-container">
-      <div className="logo-container">
+<>
+    <header>
+    <div className="logo-container">
         <Avatar src={icon} size="large" />
-
+        
         <Typography.Title level={2} className="logo">
           <Link to="/">CryptoHub</Link>
         </Typography.Title>
-        <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}>
-         <MenuOutlined/>
-        </Button>
-      </div>
-      {activeMenu && (
-        <Menu theme="dark">
-          <Menu.Item icon={<HomeOutlined />}>
+</div>
+        <nav ref={navRef}>
+        
             <Link to="/">Home</Link>
-          </Menu.Item>
-          <Menu.Item icon={<FundOutlined />}>
+        
             <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-          </Menu.Item>
-         
-          <Menu.Item icon={<BulbOutlined />}>
+       
             <Link to="/news">News</Link>
-          </Menu.Item>
-        </Menu>
-      )}
-    </div>
+       
+          <button className="nav-btn nav-close-btn" onClick={showNavbar}><FaTimes/></button>
+        </nav>
+        <button className="nav-btn" onClick={showNavbar}>
+          <FaBars/>
+        </button>
+      </header>
+  
+  
+    </>
   );
 };
 
